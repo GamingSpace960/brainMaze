@@ -2,7 +2,7 @@ import numpy as np
 import pygame
 
 
-class Brain(object):
+class Brain():
     print("hi there")
 
 Brain()

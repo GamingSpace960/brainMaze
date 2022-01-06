@@ -1,6 +1,6 @@
 import pygame as pg
 
-class World(object):
+class World():
     def __init__(self):
         pg.init()
         win = pg.display.set_mode(size = (500,500))
