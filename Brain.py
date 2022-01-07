@@ -1,8 +1,8 @@
 import numpy as np
 import pygame
+import time
 
 
-class Brain():
-    print("hi there")
-
-Brain()
+st = time.time()
+qtable = np.random.randn(250,185,4)
+print((time.time()-st))
