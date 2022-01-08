@@ -1,14 +1,12 @@
 import numpy as np
-import pygame as pg
-import World
-from time import sleep,time
+#from time import sleep,time
 
 
 # chnageable
 # speed, leadership, brainsizex, brainsizey
 
 class Evolve():
-    def __init__(self,bots,mutationRate):
+    def __init__(self,bots,mutationRate = .5):
         self.bots = bots
         self.population = len(bots)
         self.fitSize = 10
@@ -47,24 +45,26 @@ class Evolve():
 
     def mutate(self):
         for i, bot in enumerate(self.bots[self.saveNum:]):
-            if np.random.random() < self.mutationRate:
-                self.bots[i+self.saveNum].leadership += (np.random.randint(-2,2))
-            if np.random.random() < self.mutationRate:
-                num = (np.random.randint(-10,10))
-                self.bots[i+self.saveNum].mindSizeX += num
-                    
-            if np.random.random() < self.mutationRate:
-                num = (np.random.randint(-10,10))
-                self.bots[i+self.saveNum].mindSizeY += num
-            #self.mindFix(i)
             points = self.points
-            points -= self.bots[i+self.saveNum].leadership + self.bots[i+self.saveNum].mindSizeX + self.bots[i+self.saveNum].mindSizeY
-            if self.points > 3:
-                self.bots[i+self.saveNum].speed = 5
-            elif self.points < 1:
-                self.bots[i+self.saveNum].speed = 0
-            else:
-                self.bots[i+self.saveNum].speed = points
+            if np.random.random() < self.mutationRate:
+                num = np.random.randint(-1,1)
+                if self.bots[i+self.saveNum].speed + num > 0 and self.bots[i+self.saveNum].speed - num < 6:
+                    self.bots[i+self.saveNum].speed += (num)
+            points -= self.bots[i+self.saveNum].speed
+            if np.random.random() < self.mutationRate:
+                num = (np.random.randint(-5,5))
+                if self.bots[i+self.saveNum].mindSizeY + num > 0 and points-self.bots[i+self.saveNum].mindSizeY - num > 1:
+                    self.bots[i+self.saveNum].mindSizeY += num
+            points -= self.bots[i+self.saveNum].mindSizeY
+            if np.random.random() < self.mutationRate:
+                num = (np.random.randint(-5,5))
+                if self.bots[i+self.saveNum].mindSizeX + num > 0 and points-self.bots[i+self.saveNum].mindSizeX - num > 0:
+                    self.bots[i+self.saveNum].mindSizeX += num
+                elif points-self.bots[i+self.saveNum].mindSizeX < 1:
+                    self.bots[i+self.saveNum].mindSizeX = points-1
+            points -= self.bots[i+self.saveNum].mindSizeX
+
+            self.bots[i+self.saveNum].leadership = points
 
 
     def mindFix(self,i):
