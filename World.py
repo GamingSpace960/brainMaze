@@ -27,5 +27,3 @@ class World():
         pg.event.pump()
 
         
-
-map = World()
