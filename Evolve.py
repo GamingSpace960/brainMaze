@@ -13,7 +13,7 @@ class Evolve():
         self.population = len(bots)
         self.fitSize = 10
         self.mutationRate = mutationRate
-        self.points = 360
+        self.points = 350
         self.sortFitness()
         self.birth()
         self.mutate()
@@ -60,7 +60,7 @@ class Evolve():
             points = self.points
             points -= self.bots[i+self.saveNum].leadership + self.bots[i+self.saveNum].mindSizeX + self.bots[i+self.saveNum].mindSizeY
             if self.points > 3:
-                self.bots[i+self.saveNum].speed = 4
+                self.bots[i+self.saveNum].speed = 5
             elif self.points < 1:
                 self.bots[i+self.saveNum].speed = 0
             else:
