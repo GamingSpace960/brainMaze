@@ -48,7 +48,7 @@ class Evolve():
             points = self.points
             if np.random.random() < self.mutationRate:
                 num = np.random.randint(-1,1)
-                if self.bots[i+self.saveNum].speed + num > 0 and self.bots[i+self.saveNum].speed - num < 6:
+                if self.bots[i+self.saveNum].speed + num > 0 and self.bots[i+self.saveNum].speed - num < 5:
                     self.bots[i+self.saveNum].speed += (num)
             points -= self.bots[i+self.saveNum].speed
             if np.random.random() < self.mutationRate:
